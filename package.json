@@ -1,0 +1,11 @@
+{
+  "name": "tellyprompt-chromewebapp",
+  "version": "1.0.0",
+  "description": "Simple, free teleprompter",
+  "scripts": {
+    "start": "run.cmd",
+    "build": ""
+  },
+  "author": "Tim Jenkins",
+  "license": "ISC"
+}

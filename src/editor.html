@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Editor - TellyPrompt</title>
+  <link rel="stylesheet" href="lib/bootstrap-3.3.6/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="lib/window_chrome/window_chrome.css" />
+  <link rel="stylesheet" href="css/editor.css" />
+</head>
+
+<body>
+  
+    <div id="toolbar" class="ui-toolbar">
+        <div class="btn-group">
+            <button id="btnMenu" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="#" id="btnNew">New Presentation</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" id="btnOpen">Open Presentation&hellip;</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" id="btnSave">Save</a></li>
+                <li><a href="#" id="btnSaveAs">Save As&hellip;</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#" id="btnExit">Exit</a></li>
+            </ul>
+        </div>
+        <button id="btnStartPresenting" type="button" class="btn btn-primary">Start Presenting</button>
+        
+        
+        <!-- button id="btnHelp" type="button" class="btn btn-default pull-right">Help</button -->
+        <button id="btnSettings" class="btn btn-default pull-right">Settings</button>
+        
+        
+    </div>
+  
+  <textarea id="text-editor" dir="auto" class="display-font"></textarea>
+  
+  <div id="dlgSettings" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dlgSettingsTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="dlgSettingsTitle">Settings</h4>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div>
+              <ul class="nav nav-pills nav-justified" role="tablist">
+                <li role="presentation" class="active"><a href="#dlgTabStyles" aria-controls="dlgTabStyles" role="tab" data-toggle="tab">Text Styles</a></li>
+                <li role="presentation" class=""><a href="#dlgTabDisplay" aria-controls="dlgTabDisplay" role="tab" data-toggle="tab">Display</a></li>
+                <li role="presentation" class=""><a href="#dlgTabMultiMon" aria-controls="dlgTabMultiMon" role="tab" data-toggle="tab">Dual Monitor</a></li>
+              </ul>
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="dlgTabStyles">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Text Direction</label>
+                    <div class="col-sm-2">
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optionTextDir" value="auto" id="chkTextAuto"> Automatic
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optionTextDir" value="ltr" id="chkTextLTR"> Left-To-Right
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="radio">
+                        <label>
+                          <input type="radio" name="optionTextDir" value="rtl" id="chkTextRTL"> Right-To-Left
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inpEditorFontSize" class="col-sm-4 control-label">Editor Font Size</label>
+                    <div class="col-sm-3">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="inpEditorFontSize" value="16" min="8" max="9999" />
+                        <span class="input-group-addon">pt</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inpDisplayFontSize" class="col-sm-4 control-label">Display Font Size</label>
+                    <div class="col-sm-3">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="inpDisplayFontSize" value="64" min="8" max="9999" />
+                        <span class="input-group-addon">pt</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Colors</label>
+                    <div class="col-sm-1 my-form-label" id="txtReadingMarkerVPosition">
+                      Text:
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="color" id="inpDisplayFontColor" class="form-control" value="#FFFF7F" />
+                    </div>
+                    <div class="col-sm-2 my-form-label" id="txtReadingMarkerVPosition">
+                      Background:
+                    </div>
+                    <div class="col-sm-2">
+                      <input type="color" id="inpDisplayBackgroundColor" class="form-control" value="#000000" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="inpDisplayMarginsHoriz" class="col-sm-4 control-label">Horiz. Text Margins</label>
+                    <div class="col-sm-3">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="inpDisplayMarginsHoriz" value="80" min="40" />
+                        <span class="input-group-addon">px</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div role="tabpanel" class="tab-pane" id="dlgTabDisplay">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Display Mirroring</label>
+                    <div class="col-sm-3">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="chkMirrorHorizontal"> Horizontal
+                        </label>
+                      </div>
+                    </div>
+                    <div class="col-sm-3">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="chkMirrorVertical"> Vertical
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Center Marker</label>
+                    <div class="col-sm-6">
+                      <div class="checkbox">
+                        <label>
+                          <input type="checkbox" id="chkShowMarker"> Show Center Marker
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Marker Color</label>
+                    <div class="col-sm-2">
+                      <input type="color" id="inpMarkerColor" class="form-control" value="#FFFFFF" />
+                    </div>
+                    <div class="col-sm-5">
+                      <div class="input-group">
+                        <span class="input-group-addon">Opacity</span>
+                        <input type="number" class="form-control" id="inpMarkerOpacity" value="100" min="0" max="100" />
+                        <span class="input-group-addon">%</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Marker Thickness</label>
+                    <div class="col-sm-3">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="inpMarkerThickness" value="2" min="0" max="6" />
+                        <span class="input-group-addon">px</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Marker Position</label>
+                    <div class="col-sm-3">
+                      <div class="input-group">
+                        <input type="number" class="form-control" id="inpMarkerPosition" value="50" min="0" max="100" />
+                        <span class="input-group-addon">%</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div role="tabpanel" class="tab-pane" id="dlgTabMultiMon">
+                  <fieldset id="dualMonitorSettings">
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Dual Monitor</label>
+                      <div class="col-sm-7">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" id="chkUseDualMonitorView"> Use Dual Monitor mode
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-4 control-label">Display Screen</label>
+                      <div class="col-sm-7">
+                        <select class="form-control" id="selectDisplayScreen">
+                          
+                        </select>
+                        <div class="screen-debug-info">
+                            Display Info: Size: 0x0 - Offset: 0,0
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button id="dlgSettingsSave" type="button" class="btn btn-primary">OK</button>
+          <!-- button id="dlgSettingsReset" type="button" class="btn btn-danger pull-left">Clear Settings</button -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div id="dlgConfirmNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dlgConfirmNewTitle">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="dlgConfirmNewTitle">Save Changes</h4>
+        </div>
+        <div class="modal-body">
+          You have unsaved changes in the editor. Do you want to save the current document?
+        </div>
+        <div class="modal-footer">
+          <button id="dlgConfirmSave" type="button" class="btn btn-primary">Save Changes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          <button id="dlgConfirmDiscard" type="button" class="btn btn-danger pull-left">Discard Changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="lib/jquery-2.2.0.min.js"></script>
+  <script src="lib/bootstrap-3.3.6/js/bootstrap.js"></script>
+  <script src="lib/window_chrome/window_chrome.js"></script>
+  <script src="js/editor.js"></script>
+  <script src="js/fonts.js"></script>
+</body>
+</html>

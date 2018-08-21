@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>External Display - TellyPrompt</title>
+  <!-- link rel="stylesheet" href="lib/window_chrome/window_chrome.css" / -->
+  <!-- link rel="stylesheet" href="lib/window_chrome/black_window.css" / -->
+  <link rel="stylesheet" href="css/display.css" />
+</head>
+
+<body data-allowfullscreen="true" data-disableclose="true">
+  
+  <div id="screenMarker">
+    <svg id="markerHr" height="64" width="100%">
+      <line x1="0" y1="32" x2="100%" y2="32" stroke="white" stroke-width="2" />
+    </svg>
+    <svg id="triLeft" height="64" width="32">
+      <path d="M0,0 L32,32 L0,64 Z" fill="white" />
+    </svg>
+    <svg id="triRight" height="64" width="32">
+      <path d="M32,0 L0,32 L32,64 Z" fill="white" />
+    </svg>
+  </div>
+  
+  <div id="text"><div id="content" dir="ltr" class="display-font"></div></div>
+  
+  <div id="topGradient"></div>
+  <div id="bottomGradient"></div>
+  
+  <div id="scrollDisabler"></div>
+  
+  <script src="lib/jquery-2.2.0.min.js"></script>
+  <!-- script src="lib/window_chrome/window_chrome.js"></script -->
+  <script src="js/display.js"></script>
+  <script src="js/fonts.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+body {
+    overflow-y: auto;
+    position: relative;
+    margin-top: 0px;
+    padding-top: 31px;
+}
+.scroller {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.help-sidebar {
+    margin-right: 18px;
+}
+
+.help-sidebar .nav .nav {
+    display: none;
+}

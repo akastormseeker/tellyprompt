@@ -1,0 +1,25 @@
+{
+   "app": {
+      "background": {
+         "scripts": [ "js/background.js" ]
+      }
+   },
+   "description": "Simple, free teleprompter. Paste text into editor window, and click \"Start Presenting\".",
+   "icons": {
+      "128": "images/icon_128.png",
+      "16": "images/icon_16.png",
+      "32": "images/icon_32.png",
+      "48": "images/icon_48.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnJq4Q/uLvyx4ohL5KufAOO7FTYYmGR4hgrGIfN7x7Ut+dqoPTm/TVSZrzcvTsBq+fPiAY5aAiJNTQzYuOnx1ALsla/YW0NrU5gibeoCQhNnk9Q7DjGwznMte2Exsu1AT5YkdAgEA5JbC+gu6mfYyPnGqKQ300gluGzY/fP9w3qq4dzE7AXz4H7vqPMlJtEQ8/zKV6AY7Vbu+D3KFenzeE508lTfiCg6Og/7qzyW+1F/JI90HQQbObYGGoBcHUCPJ5gA3skg3FBC31gFZsbgtjzE+PB9mmWFKmfG/JqRD0JyfL6JeZl7fvuRCPDDcJUE28SOc8fWyxZDSaAZSSjpGBwIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "38",
+   "name": "TellyPrompt",
+   "offline_enabled": true,
+   "permissions": [ {
+      "fileSystem": [ "write", "retainEntries" ]
+   }, "app.window.fullscreen.overrideEsc", "storage", "system.display", "alwaysOnTopWindows" ],
+   "short_name": "TellyPrompt",
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "1.0.9"
+}

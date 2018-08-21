@@ -1,0 +1,27 @@
+v1.0.9
+- Fixed a bug preventing auto-scrolling from working on certain systems
+
+v1.0.8
+- Fixed a bug causing issues overwriting existing save files
+
+v1.0.7
+- Added ability to control presentation speed with arrow keys. Hold SHIFT for fine-grained adjustments or CTRL for coarse adjustments.
+- Added options to adjust the center marker: show/hide, color, opacity, line thickness, and vertical position
+
+v1.0.6
+- Added the ability to save and load the presentations (as plain text files).
+- Updated the app icon to be more visible on dark backgrounds.
+- Added "Automatic" text direction in settings. Most of you will want this, but just in case, you can force it to RTL/LTR if you still need to.
+- Detects when system display configuration changes, and updates settings accordingly. No more restarting app between changes!
+- Minor bug fixes / improvements
+
+v1.0.5
+- Fixed a bug that prevented dual-display mode from being disabled if there were no longer multiple displays connected
+
+v1.0.4
+- Fixed a bug where mirroring didn't work when using single-monitor mode
+- Fixed some minor display issues
+
+v1.0.3
+- Added presenter view with multi-monitor support
+- Moved settings to their own dialog

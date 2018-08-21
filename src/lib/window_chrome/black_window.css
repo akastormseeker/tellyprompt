@@ -1,0 +1,32 @@
+/* Window Background Color */
+body, .ui-titlebar { background-color: #000000; }
+
+/* Window Foreground Color (ie. text) */
+body { color: #CCCCCC; }
+
+/* Window Border Colors */
+body { border-color: #444444; }
+body.window-focused { border-color: #888888; }
+
+/* Titlebar and Button Foreground Colors */
+.ui-titlebar .ui-titlebar-title,
+.ui-window-buttons .ui-window-button { color: #888888; }
+
+.window-focused .ui-titlebar .ui-titlebar-title,
+.window-focused .ui-window-buttons .ui-window-button { color: #CCCCCC; }
+
+.ui-window-buttons .ui-window-button svg path { stroke: #888888; }
+.window-focused .ui-window-buttons .ui-window-button svg path,
+.ui-window-buttons .ui-window-button:hover svg path { stroke: #CCCCCC; }
+
+.ui-window-buttons .ui-window-button.wb-fullscreen svg path,
+.ui-window-buttons .ui-window-button.wb-unfullscreen svg path{
+  stroke-width: 0px;
+  fill: #888;
+}
+.window-focused .ui-window-buttons .ui-window-button.wb-fullscreen svg path,
+.window-focused .ui-window-buttons .ui-window-button.wb-unfullscreen svg path,
+.ui-window-buttons .ui-window-button.wb-fullscreen:hover svg path,
+.ui-window-buttons .ui-window-button.wb-unfullscreen:hover svg path{
+  fill: #CCCCCC;
+}
