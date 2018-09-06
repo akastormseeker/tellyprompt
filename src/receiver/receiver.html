@@ -7,7 +7,14 @@
 <body>
   <cast-media-player></cast-media-player>
   <script>
-    cast.framework.CastReceiverContext.getInstance().start();
+    const context = cast.framework.CastReceiverContext.getInstance();
+
+    const CONTROL_CHANNEL = 'urn:x-cast:akastormseeker.tellyprompt';
+    context.addCustomMessageListener(CONTROL_CHANNEL, function(event) {
+        // handle event.
+    });
+
+    context.start();
   </script>
 </body>
 </html>
