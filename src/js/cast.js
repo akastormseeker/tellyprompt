@@ -8,7 +8,7 @@ function initializeCastApi() {
     console.log("Initializing Google Cast API...");
 
     cast.framework.CastContext.getInstance().setOptions({
-        receiverApplicationId: applicationId,
+        receiverApplicationId: "C5CCCF82",
         autoJoinPolicy: chrome.cast.AutoJoinPolicy.ORIGIN_SCOPED
     });
 }
