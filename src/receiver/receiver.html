@@ -32,8 +32,28 @@
     });
 
     context.addEventListener(cast.framework.system.EventType.READY, () => {
-        
+        fadeOutLogo(2000);
     });
+    
+    function fadeOutLogo(fadeTime) {
+      var lastStepTime = Date.now();
+      var elem = document.getElementById("logo");
+      
+      function doFadeStep() {
+        var stepTime = Date.now();
+        var stepMillis = stepTime - lastStepTime;
+        lastStepTime = stepTime;
+        var progress = Math.max(0.0, Math.min(1.0, stepMillis / fadeTime));
+        var opacity = 1.0 - progress;
+        elem.style.opacity = opacity;
+        
+        if(progress < 1.0) {
+          setTimeout(doFadeStep, 10);
+        }
+      }
+      
+      doFadeStep();
+    }
 
     const options = new cast.framework.CastReceiverOptions();
     options.maxInactivity = 3600; //Development only
