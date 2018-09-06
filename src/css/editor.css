@@ -14,14 +14,14 @@ body {
   top:0;
   right:0;
   bottom:0;
-  padding: 68px 4px 4px 4px;
+  padding: 36px 4px 4px 4px;
 }
 
 .ui-toolbar {
   position: fixed;
   left: 0px;
   right: 0px;
-  top: 32px;
+  top: 0px;
   height: 36px;
   line-height: 36px;
   padding-left: 8px;
@@ -51,6 +51,18 @@ body.maximized {
   padding-top: 4px;
   padding-bottom: 4px;
   /*float: left;*/
+}
+
+#docTitle {
+  display: inline-block;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-right: 4px;
+
+  line-height: 20px;
+  font-size: 16px;
+  
+  padding: 5px 8px;
 }
 
 #btnMenu {

@@ -21,5 +21,13 @@
    }, "app.window.fullscreen.overrideEsc", "storage", "system.display", "alwaysOnTopWindows" ],
    "short_name": "TellyPrompt",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.0.9"
+   "version": "1.0.9",
+   "content_scripts": [
+        {
+            "js": [
+                "https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1",
+                "https://www.gstatic.com/cast/sdk/libs/sender/1.0/cast_framework.js"
+            ]
+        }
+    ]
 }

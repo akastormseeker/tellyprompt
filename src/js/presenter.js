@@ -106,6 +106,19 @@ var updateMirroring = function() {
     $("#text").css("transform", "scale(" + ((!presenterOpen && mirrorHoriz) ? "-1" : "1") + ", " + ((!presenterOpen && mirrorVert) ? "-1" : "1") + ")");
 };
 
+function syncButtonState() {
+  var wnd = chrome.app.window.current();
+  if(wnd.isFullscreen()) {
+    $("#windowFullscreen").hide();
+    $("#windowUnfullscreen").show();
+    $("body").addClass("fullscreen");
+  } else {
+    $("#windowFullscreen").show();
+    $("#windowUnfullscreen").hide();
+    $("body").removeClass("fullscreen");
+  }
+}
+
 $(document).ready(function() {
   
   scrollSpeedHandler();
@@ -185,6 +198,7 @@ $(document).ready(function() {
     haveSettings = true;
     
     updateMirroring();
+    syncButtonState();
     
     if(usePresenter) {
       showPresenterWindow();
@@ -257,7 +271,19 @@ $(document).ready(function() {
   });
   
   displayContentWidth = $("#content").width();
+
+  chrome.app.window.current().onFullscreened.addListener(function() { syncButtonState(); });
+  chrome.app.window.current().onRestored.addListener(function() { syncButtonState(); });
+  chrome.app.window.current().onMaximized.addListener(function() { syncButtonState(); });
+  chrome.app.window.current().onMinimized.addListener(function() { syncButtonState(); });
   
+  $("#windowFullscreen").on("click", function() {
+    chrome.app.window.current().fullscreen();
+  });
+  $("#windowUnfullscreen").on("click", function() {
+    chrome.app.window.current().restore();
+  });
+
   $(window).resize();
 });
 

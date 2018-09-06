@@ -21,21 +21,13 @@ body {
 .ui-toolbar {
   position: fixed;
   z-index: 1000;
-  left: 1px;
-  right: 1px;
-  top: 32px;
+  left: 0px;
+  right: 0px;
+  top: 0px;
   height: 36px;
   line-height: 32px;
   background-color: black;
   text-align: center;
-}
-body.fullscreen .ui-toolbar {
-  top: 0px;
-  left: 0px;
-  right: 0px;
-}
-body.maximized .ui-toolbar {
-  top: 22px;
 }
 
 
@@ -47,6 +39,13 @@ body.maximized .ui-toolbar {
   float: left;
   line-height: 32px;
   padding-left: 8px;
+}
+#tb-right {
+  float: right;
+  line-height: 32px;
+  padding-right: 8px;
+  height: 32px;
+  left: auto;
 }
 
 #tb-left button {
@@ -68,6 +67,22 @@ body.maximized .ui-toolbar {
   padding-bottom: 0px;
   margin-top: 0px;
   margin-bottom: 0px;
+}
+
+#windowFullscreen svg path,
+#windowUnfullscreen svg path { stroke: #CCCCCC; }
+#windowFullscreen,
+#windowUnfullscreen {
+  background: transparent;
+  border: 0px solid transparent;
+  width: 48px;
+  height:32px;
+}
+#windowFullscreen:hover {
+  background: rgba(255,255,255,0.2);
+}
+#windowFullscreen:active {
+  background: rgba(255,255,255,0.1);
 }
 
 #toolbar label {

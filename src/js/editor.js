@@ -37,6 +37,7 @@ var setEditorFile = function(entry) {
 
 var updateWindowTitle = function() {
     $("title").html("" + (editorIsDirty ? "&#x25cf;" : "") + editorFileName + " - Editor - TellyPrompt");
+    $("#docTitle").html("" + (editorIsDirty ? "&#x25cf;" : "") + editorFileName);
 }
 
 var getSystemDisplays = function() {
@@ -268,7 +269,9 @@ $(document).ready(function() {
         'presenter.html',
         {
             id: 'presenterWindow',
-            frame: 'none',
+            frame: {
+                type: "chrome"
+            },
             resizable: true,
             innerBounds: {width: 800, height: 600}
         },

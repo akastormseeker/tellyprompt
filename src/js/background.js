@@ -10,7 +10,8 @@ chrome.app.runtime.onLaunched.addListener(function(launchData) {
     'editor.html',
     {
       id: 'editorWindow',
-      frame: 'none',
+      frame: 'chrome',
+      resizable: true,
       bounds: {width: 800, height: 600}
     },
     function(wnd) {

@@ -1,3 +1,7 @@
+v1.1.0
+- Added Chromecast support! Yay!
+- Fixed a bug where the un-fullscreen button refused to show itself
+
 v1.0.9
 - Fixed a bug preventing auto-scrolling from working on certain systems
 
