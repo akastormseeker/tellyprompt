@@ -18,6 +18,7 @@ function postMsg(msg) {
   if(syncPort !== null) {
     syncPort.postMessage(msg);
   }
+  castMessage(msg);
 }
 function toRgbaString(hexColor, alpha) {
   var shorthandRegex = /^#?([0-9A-F])([0-9A-F])([0-9A-F])$/i;

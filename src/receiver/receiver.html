@@ -4,10 +4,6 @@
       src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js">
   </script>
   <style>
-      html,body {
-          color: #ffffff;
-          background-color: #000000;
-      }
       #logo {
           font-size: 20rem;
           font-weight: bold;
@@ -17,12 +13,37 @@
           left: 0;
           top: 40%;
           width: 100vw;
+          z-index: 10000;
       }
   </style>
+  <link rel="stylesheet" type="text/css" href="receiver.css" />
 </head>
 <body>
   
 <div id="logo">TellyPrompt</div>
+
+<div id="screenMarker">
+        <svg id="markerHr" height="64" width="100%">
+          <line x1="0" y1="32" x2="100%" y2="32" stroke="white" stroke-width="2" />
+        </svg>
+        <svg id="triLeft" height="64" width="32">
+          <path d="M0,0 L32,32 L0,64 Z" fill="white" />
+        </svg>
+        <svg id="triRight" height="64" width="32">
+          <path d="M32,0 L0,32 L32,64 Z" fill="white" />
+        </svg>
+      </div>
+      
+      <div id="text"><div id="content" dir="ltr" class="display-font"></div></div>
+      
+      <div id="topGradient"></div>
+      <div id="bottomGradient"></div>
+      
+      <div id="scrollDisabler"></div>
+      
+      <script src="jquery-2.2.0.min.js"></script>
+      <!-- script src="lib/window_chrome/window_chrome.js"></script -->
+      <script src="receiver.js"></script>
 
   <script>
     const context = cast.framework.CastReceiverContext.getInstance();

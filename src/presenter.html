@@ -16,7 +16,7 @@
     </div>
 
     <div id="tb-right" class="ui-toolbar" style="left: auto;">
-      <google-cast-launcher></google-cast-launcher>
+      <div class="cast-launcher-container"><google-cast-launcher class="cast-launcher"></google-cast-launcher></div>
       <button id="windowFullscreen" title="Enter Fullscreen"><svg width="12" height="12"><path d="M0,0 L5,0 L5,1 L2,1 L5,4 L4,5 L1,2 L1,5 L0,5 Z M12,0 L7,0 L7,1 L10,1 L7,4 L8,5 L11,2 L11,5 L12,5 Z M12,12 L7,12 L7,11 L10,11 L7,8 L8,7 L11,10 L11,7 L12,7 Z M0,12 L5,12 L5,11 L2,11 L5,8 L4,7 L1,10 L1,7 L0,7 Z" /></svg></button>
       <button id="windowUnfullscreen" title="Leave Fullscreen"><svg width="12" height="12"><path d="M7,7 L12,7 L12,8 L9,8 L12,11 L11,12 L8,9 L8,12 L7,12 Z M5,7 L0,7 L0,8 L3,8 L0,11 L1,12 L4,9 L4,12 L5,12 Z M5,5 L0,5 L0,4 L3,4 L0,1 L1,0 L4,3 L4,0 L5,0 Z M7,5 L12,5 L12,4 L9,4 L12,1 L11,0 L8,3 L8,0 L7,0 Z" /></svg></button>
     </div>
@@ -61,6 +61,6 @@
   <script src="js/fonts.js"></script>
 
   <script src="js/cast.js"></script>
-  <script src="https://www.gstatic.com/cv/js/sender/v1/cast_sender.js?loadCastFramework=1"></script>
+  <script src="lib/cast/cast_sender.js?loadCastFramework=1"></script>
 </body>
 </html>
