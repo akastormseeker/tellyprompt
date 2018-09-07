@@ -57,14 +57,14 @@
     });
     
     function fadeOutLogo(fadeTime) {
-      var lastStepTime = Date.now();
+      var startTime = Date.now();
       var elem = document.getElementById("logo");
       
       function doFadeStep() {
         var stepTime = Date.now();
-        var stepMillis = stepTime - lastStepTime;
-        lastStepTime = stepTime;
-        var progress = Math.max(0.0, Math.min(1.0, stepMillis / fadeTime));
+        var timeMillis = stepTime - startTime;
+        //lastStepTime = stepTime;
+        var progress = Math.max(0.0, Math.min(1.0, timeMillis / fadeTime));
         var opacity = 1.0 - progress;
         elem.style.opacity = opacity;
         
