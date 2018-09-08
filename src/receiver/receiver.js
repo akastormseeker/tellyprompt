@@ -1,6 +1,4 @@
 
-var syncPort = null;
-
 var mirrorHoriz = false;
 var mirrorVert = false;
 
@@ -25,7 +23,7 @@ var resizeWindow = function(bounds) {
 };
 
 $(document).ready(function() {
-  
+  /*
   chrome.storage.onChanged.addListener(function(changes, namespace) {
     for (var key in changes) {
       var storageChange = changes[key];
@@ -76,8 +74,9 @@ $(document).ready(function() {
         $("#screenMarker svg line").css("stroke", storageChange.newValue);
         $("#screenMarker svg path").css("fill", storageChange.newValue);
       }
-    }
+    } 
   });
+  */
   
   $(window).resize();
 });
@@ -120,7 +119,7 @@ $(window).on("resize", function() {
   
   //updateProgressBar();
   
-  if(syncPort !== null) syncPort.postMessage({"cmd": "resizeContent", "value": { "height": $("#content").height(), "width": $("#content").width() } });
+  //if(syncPort !== null) syncPort.postMessage({"cmd": "resizeContent", "value": { "height": $("#content").height(), "width": $("#content").width() } });
 }).resize();
 
 
