@@ -21,6 +21,10 @@ function initializeCastApi() {
     });
     cast.framework.CastContext.getInstance().addEventListener(cast.framework.CastContextEventType.SESSION_STATE_CHANGED, (event) => {
         console.log("Session State Changed", event);
+
+        if(event.sessionState == "SESSION_STARTED") {
+
+        }
     });
 
     gCastInitialized = true;
@@ -28,7 +32,6 @@ function initializeCastApi() {
 
 function getCastSession() {
     if(!gCastInitialized) {
-        console.log("google cast not initialized!");
         return null;
     }
 
@@ -40,4 +43,16 @@ function castMessage(msg) {
     if(session == null) return;
 
     session.sendMessage(CONTROL_CHANNEL, msg);
+}
+
+function sendCastConfigurationMessage() {
+    var cfgMsg = {
+        cmd: "config",
+        data: {}
+    };
+
+    chrome.storage.local.get(['mirrorHoriz', 'mirrorVert', 'contentText', 'textDirection', 'displayFontSize', 'displayTextColor', 'displayBackgroundColor', 'marginsHoriz'], function(items) {
+        cfgMsg.data = items;
+        castMessage(cfgMsg);
+    });
 }

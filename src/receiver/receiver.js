@@ -20,98 +20,11 @@ function toRgbaString(hexColor, alpha) {
   return hexColor;
 }
 
-chrome.app.window.current().onRestored.addListener(function() {
-  if(windowBounds !== null) {
-    var wnd = chrome.app.window.current();
-    wnd.outerBounds.left = windowBounds.left;
-    wnd.outerBounds.top = windowBounds.top;
-    wnd.outerBounds.width = windowBounds.width;
-    wnd.outerBounds.height = windowBounds.height;
-    //wnd.fullscreen();
-  }
-});
-
 var resizeWindow = function(bounds) {
   windowBounds = bounds;
-  // trigger onRestored event to set bounds and re-fullscreen the window
-  //chrome.app.window.current().restore();
-  /*
-  if(windowBounds !== null) {
-    var wnd = chrome.app.window.current();
-    wnd.outerBounds.left = windowBounds.left;
-    wnd.outerBounds.top = windowBounds.top;
-    wnd.outerBounds.width = windowBounds.width;
-    wnd.outerBounds.height = windowBounds.height;
-    //wnd.fullscreen();
-  }
-  */
 };
 
 $(document).ready(function() {
-  
-  chrome.storage.local.get(['mirrorHoriz', 'mirrorVert', 'contentText', 'textDirection', 'displayFontSize', 'displayTextColor', 'displayBackgroundColor', 'marginsHoriz', 'displayScreenId'], function(items) {
-    if(items.hasOwnProperty('mirrorHoriz')) {
-      mirrorHoriz = items['mirrorHoriz'];
-      updateMirroring();
-    }
-    if(items.hasOwnProperty('mirrorVert')) {
-      mirrorVert = items['mirrorVert'];
-      updateMirroring();
-    }
-    if(items.hasOwnProperty('marginsHoriz')) {
-      $("#text").css("padding-left", items['marginsHoriz'] + "px")
-          .css("padding-right", items['marginsHoriz'] + "px");
-    }
-    if(items.hasOwnProperty('contentText')) {
-      $("#content").html(items['contentText']);
-    }
-    if(items.hasOwnProperty('textDirection')) {
-      $("#content").attr('dir', items['textDirection']);
-    }
-    if(items.hasOwnProperty('displayFontSize')) {
-      $("#content").css('font-size', items['displayFontSize'] + "pt");
-    }
-    if(items.hasOwnProperty('displayTextColor')) {
-      $("#content").css('color', items['displayTextColor']);
-    }
-    if(items.hasOwnProperty('displayBackgroundColor')) {
-      $("body").css('background-color', items['displayBackgroundColor']);
-      $("#topGradient").css('background', 'linear-gradient(to bottom, ' + toRgbaString(items['displayBackgroundColor'], 1) + ' 0%,' + toRgbaString(items['displayBackgroundColor'], 0) + ' 100%)');
-      $("#bottomGradient").css('background', 'linear-gradient(to bottom, ' + toRgbaString(items['displayBackgroundColor'], 0) + ' 0%,' + toRgbaString(items['displayBackgroundColor'], 1) + ' 100%)');
-    }
-    
-    //, 'centerMarkerVisible', 'centerMarkerColor', 'centerMarkerOpacity', 'centerMarkerPosition'
-    if(items.hasOwnProperty('centerMarkerVisible')) {
-      $("#screenMarker").toggle(items['centerMarkerVisible']);
-    }
-    if(items.hasOwnProperty('centerMarkerOpacity')) {
-      $("#screenMarker").css('opacity', items['centerMarkerVisible']);
-    }
-    if(items.hasOwnProperty('centerMarkerPosition')) {
-      $("#screenMarker").css("top", items['centerMarkerPosition'] + "%");
-      markerPosition = items['centerMarkerPosition'] / 100.0;
-      updateMargins();
-    }
-    if(items.hasOwnProperty('centerMarkerLineThickness')) {
-      $("#screenMarker svg line").css("strokeWidth", items['centerMarkerLineThickness']);
-    }
-    if(items.hasOwnProperty('centerMarkerColor')) {
-      $("#screenMarker svg line").css("stroke", items['centerMarkerColor']);
-      $("#screenMarker svg path").css("fill", items['centerMarkerColor']);
-    }
-    
-    if(items.hasOwnProperty('displayScreenId')) {
-      console.log("displayScreenId: ", items['displayScreenId']);
-      chrome.system.display.getInfo(function(displays) {
-        for(var i = 0; i < displays.length; i++) {
-          if(displays[i].id == items['displayScreenId']) {
-            console.log("found display with ID ", items['displayScreenId']);
-            resizeWindow(displays[i].bounds);
-          }
-        }
-      });
-    }
-  });
   
   chrome.storage.onChanged.addListener(function(changes, namespace) {
     for (var key in changes) {

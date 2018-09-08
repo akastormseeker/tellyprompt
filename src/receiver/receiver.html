@@ -49,11 +49,11 @@
 
     const CONTROL_CHANNEL = 'urn:x-cast:akastormseeker.tellyprompt';
     context.addCustomMessageListener(CONTROL_CHANNEL, function(event) {
-        // handle event.
+        console.log("Message Received: ", event);
     });
 
     context.addEventListener(cast.framework.system.EventType.READY, () => {
-        fadeOutLogo(2000);
+        //fadeOutLogo(2000);
     });
     
     function fadeOutLogo(fadeTime) {
