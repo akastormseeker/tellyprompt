@@ -25,61 +25,65 @@ var resizeWindow = function(bounds) {
 $(document).ready(function() {
   /*
   chrome.storage.onChanged.addListener(function(changes, namespace) {
-    for (var key in changes) {
-      var storageChange = changes[key];
-      if(key == "contentText") {
-        $("#content").html(storageChange.newValue);
-      }
-      else if(key == 'textDirection') {
-        $("#content").attr('dir', storageChange.newValue);
-      }
-      else if(key == 'displayFontSize') {
-        $("#content").css('font-size', storageChange.newValue + "pt");
-      }
-      else if(key == 'mirrorHoriz') {
-        mirrorHoriz = storageChange.newValue;
-        updateMirroring();
-      }
-      else if(key == 'mirrorVert') {
-        mirrorVert = storageChange.newValue;
-        updateMirroring();
-      }
-      else if(key == 'marginsHoriz') {
-        $("#text").css("padding-left", storageChange.newValue + "px")
-          .css("padding-right", storageChange.newValue + "px");
-      }
-      else if(key == 'displayBackgroundColor') {
-        $("body").css('background-color', storageChange.newValue);
-        $("#topGradient").css('background', 'linear-gradient(to bottom, ' + toRgbaString(storageChange.newValue, 1) + ' 0%,' + toRgbaString(storageChange.newValue, 0) + ' 100%)');
-        $("#bottomGradient").css('background', 'linear-gradient(to bottom, ' + toRgbaString(storageChange.newValue, 0) + ' 0%,' + toRgbaString(storageChange.newValue, 1) + ' 100%)');
-      }
-      else if(key == 'displayTextColor') {
-        $("#content").css('color', items['displayTextColor']);
-      }
-      else if(key == 'centerMarkerVisible') {
-        $("#screenMarker").toggle(storageChange.newValue);
-      }
-      else if(key == 'centerMarkerOpacity') {
-        $("#screenMarker").css('opacity', storageChange.newValue);
-      }
-      else if(key == 'centerMarkerPosition') {
-        $("#screenMarker").css("top", storageChange.newValue + "%");
-        markerPosition = storageChange.newValue / 100.0;
-        updateMargins();
-      }
-      else if(key == 'centerMarkerLineThickness') {
-        $("#screenMarker svg line").css("strokeWidth", storageChange.newValue + "px");
-      }
-      else if(key == 'centerMarkerColor') {
-        $("#screenMarker svg line").css("stroke", storageChange.newValue);
-        $("#screenMarker svg path").css("fill", storageChange.newValue);
-      }
-    } 
+    
   });
   */
   
   $(window).resize();
 });
+
+function processConfigData(changes) {
+  for (var key in changes) {
+    var value = changes[key];
+    if(key == "contentText") {
+      $("#content").html(value);
+    }
+    else if(key == 'textDirection') {
+      $("#content").attr('dir', value);
+    }
+    else if(key == 'displayFontSize') {
+      $("#content").css('font-size', value + "pt");
+    }
+    else if(key == 'mirrorHoriz') {
+      mirrorHoriz = value;
+      updateMirroring();
+    }
+    else if(key == 'mirrorVert') {
+      mirrorVert = value;
+      updateMirroring();
+    }
+    else if(key == 'marginsHoriz') {
+      $("#text").css("padding-left", value + "px")
+        .css("padding-right", value + "px");
+    }
+    else if(key == 'displayBackgroundColor') {
+      $("body").css('background-color', value);
+      $("#topGradient").css('background', 'linear-gradient(to bottom, ' + toRgbaString(value, 1) + ' 0%,' + toRgbaString(value, 0) + ' 100%)');
+      $("#bottomGradient").css('background', 'linear-gradient(to bottom, ' + toRgbaString(value, 0) + ' 0%,' + toRgbaString(value, 1) + ' 100%)');
+    }
+    else if(key == 'displayTextColor') {
+      $("#content").css('color', value);
+    }
+    else if(key == 'centerMarkerVisible') {
+      $("#screenMarker").toggle(value);
+    }
+    else if(key == 'centerMarkerOpacity') {
+      $("#screenMarker").css('opacity', value);
+    }
+    else if(key == 'centerMarkerPosition') {
+      $("#screenMarker").css("top", value + "%");
+      markerPosition = value / 100.0;
+      updateMargins();
+    }
+    else if(key == 'centerMarkerLineThickness') {
+      $("#screenMarker svg line").css("strokeWidth", value + "px");
+    }
+    else if(key == 'centerMarkerColor') {
+      $("#screenMarker svg line").css("stroke", value);
+      $("#screenMarker svg path").css("fill", value);
+    }
+  } 
+}
 
 var updateMirroring = function() {
   $("#text").css("transform", "scale(" + (mirrorHoriz ? "-1" : "1") + ", " + (mirrorVert ? "-1" : "1") + ")");
