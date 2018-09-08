@@ -52,11 +52,12 @@
             console.log("Message Received: ", event);
             var msg = event.data;
 
-            if(msg.cmd) {
+            if(msg.hasOwnProperty("cmd")) {
                 if(msg.cmd == "heartbeat") {
                     console.log("heartbeat received.");
                 }
-                if(msg.cmd == "config") {
+                else if(msg.cmd == "config") {
+                    console.log("config received.", msg.data);
                     if(!firstConfigReceived) {
                         fadeOutLogo();
                         firstConfigReceived = true;
