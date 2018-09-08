@@ -24,6 +24,12 @@ function initializeCastApi() {
 
         if(event.sessionState == "SESSION_STARTED") {
             sendReceiverConfigurationMessage();
+            monitorConfigurationChanges();
+            startHeartbeat();
+        }
+        else if(event.sessionState == "SESSION_ENDING") {
+            stopMonitoringConfigChanges();
+            stopHeartbeat();
         }
     });
 
@@ -45,14 +51,54 @@ function castMessage(msg) {
     session.sendMessage(CONTROL_CHANNEL, msg);
 }
 
-function sendReceiverConfigurationMessage() {
-    var cfgMsg = {
-        cmd: "config",
-        data: {}
-    };
+var isHeartbeating = false;
+var heartbeatInterval = null;
+function startHeartbeat() {
+    if(isHeartbeating) return;
+    heartbeatInterval = setInterval(function() {
+        castMessage({cmd: "heartbeat"});
+    }, 30000);
+    isHeartbeating = true;
+}
+function stopHeartbeat() {
+    if(!isHeartbeating) return;
+    clearInterval(heartbeatInterval);
+    heartbeatInterval = null;
+    isHeartbeating = false;
+}
 
+function sendConfigMessage(data) {
+    var msg = {
+        cmd: "config",
+        data: data
+    }
+    castMessage(msg);
+}
+
+function sendReceiverConfigurationMessage() {
     chrome.storage.local.get(['mirrorHoriz', 'mirrorVert', 'contentText', 'textDirection', 'displayFontSize', 'displayTextColor', 'displayBackgroundColor', 'marginsHoriz'], function(items) {
-        cfgMsg.data = items;
-        castMessage(cfgMsg);
+        sendConfigMessage(items);
     });
 }
+
+var isMonitoringConfigChanges = false;
+function monitorConfigurationChanges() {
+    if(isMonitoringConfigChanges) return;
+    isMonitoringConfigChanges = true;
+}
+function stopMonitoringConfigChanges() {
+    if(!isMonitoringConfigChanges) return;
+    isMonitoringConfigChanges = false;
+}
+
+chrome.storage.onChanged.addListener(function(changes, namespace) {
+    config = {};
+
+    for (var key in changes) {
+      config[key] = changes[key].newValue;
+    }
+
+    if(isMonitoringConfigChanges) {
+        sendConfigMessage(config);
+    }
+  });
