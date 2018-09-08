@@ -53,7 +53,10 @@ function fadeOutLogo(fadeTime) {
         elem.style.opacity = opacity;
         
         if(progress < 1.0) {
-            _setTimeout(doFadeStep, 10);
+            _setTimeout(doFadeStep, 1);
+        }
+        else {
+          elem.style.display = "none";
         }
     }
     
