@@ -1,5 +1,11 @@
 <html>
 <head>
+    <script type="text/javascript">
+    window._setTimeout = window.setTimeout;
+    window.setTimeout = function(a, b) {
+        // disable setTimeout so chromecast won't kill us after 5 minutes...
+    };
+    </script>
     <script type="text/javascript" src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
     <style>
     #logo {
@@ -18,7 +24,9 @@
     <link rel="stylesheet" type="text/css" href="receiver.css" />
 </head>
 <body>
-    <div id="logo">TellyPrompt</div>
+    <div id="logo">
+        TellyPrompt
+    </div>
 
     <div id="screenMarker">
         <svg id="markerHr" height="64" width="100%">

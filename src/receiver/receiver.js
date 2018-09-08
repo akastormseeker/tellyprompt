@@ -53,7 +53,7 @@ function fadeOutLogo(fadeTime) {
         elem.style.opacity = opacity;
         
         if(progress < 1.0) {
-            setTimeout(doFadeStep, 10);
+            _setTimeout(doFadeStep, 10);
         }
     }
     
@@ -118,7 +118,7 @@ function processConfigData(changes) {
       $("#content").css('color', value);
     }
     else if(key == 'centerMarkerVisible') {
-      $("#screenMarker").toggle(value);
+      $("#screenMarker").toggle(!!value);
     }
     else if(key == 'centerMarkerOpacity') {
       $("#screenMarker").css('opacity', value);
