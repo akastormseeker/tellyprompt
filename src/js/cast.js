@@ -23,7 +23,7 @@ function initializeCastApi() {
         console.log("Session State Changed", event);
 
         if(event.sessionState == "SESSION_STARTED") {
-
+            sendReceiverConfigurationMessage();
         }
     });
 
@@ -45,7 +45,7 @@ function castMessage(msg) {
     session.sendMessage(CONTROL_CHANNEL, msg);
 }
 
-function sendCastConfigurationMessage() {
+function sendReceiverConfigurationMessage() {
     var cfgMsg = {
         cmd: "config",
         data: {}
