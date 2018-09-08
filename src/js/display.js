@@ -214,7 +214,6 @@ $(window).on("resize", function() {
   
   updateMargins();
   
-  
   //updateProgressBar();
   
   if(syncPort !== null) syncPort.postMessage({"cmd": "resizeContent", "value": { "height": $("#content").height(), "width": $("#content").width() } });

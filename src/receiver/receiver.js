@@ -82,12 +82,6 @@ var resizeWindow = function(bounds) {
 };
 
 $(document).ready(function() {
-  /*
-  chrome.storage.onChanged.addListener(function(changes, namespace) {
-    
-  });
-  */
-  
   $(window).resize();
 });
 
