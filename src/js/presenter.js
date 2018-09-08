@@ -440,6 +440,7 @@ $("#chkDisableScroll").on("change", function() {
 });
 
 $("#text").on("scroll", updateProgressBar).scroll();
+$(".scrollable").on("scroll", updateProgressBar);
 
 $("#btnStart").on("click", function() {
   setScrolling(!isScrolling);

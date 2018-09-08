@@ -95,7 +95,7 @@ function processConfigData(changes) {
       $("#content").attr('dir', value);
     }
     else if(key == 'displayFontSize') {
-      $("#content").css('font-size', (value*0.9) + "pt");
+      $("#content").css('font-size', (value*0.8) + "pt");
     }
     else if(key == 'mirrorHoriz') {
       mirrorHoriz = value;
