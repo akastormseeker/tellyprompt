@@ -319,10 +319,6 @@ var scrollSpeed = 1;
 var lastScroll = 0;
 var scrollAccumulator = 0;
 
-var lastScrollPos = 0;
-var sameScrollPosStart = Date.now();
-var sameScrollPosCount = 0;
-
 var scrollFn = function() {
   var now = Date.now();
   var frameTime = (now - lastScroll) / 1000.0;
@@ -332,16 +328,12 @@ var scrollFn = function() {
   var scrollAmount = frameTime * scrollSpeed * lineHeight;
   
   var curTop = $("#text").scrollTop();
-  if(curTop == lastScrollPos) {
-    sameScrollPosCount++;
-    if(now - sameScrollPosStart > 200 && sameScrollPosCount > 5 && isScrolling) {
-      console.log("Cancelling auto-scroll.");
-      $("#btnStart").click();
-    }
-  } else {
-    sameScrollPosStart = now;
-    sameScrollPosCount = 0;
-    lastScrollPos = curTop;
+
+  var scrollPercent = getScrollPercent();
+  console.log(scrollPercent);
+  if(scrollPercent >= 1.0) {
+    console.log("Cancelling auto-scroll.");
+    $("#btnStart").click();
   }
 
   if(scrollAmount > 0) {
@@ -366,18 +358,38 @@ var scrollFn = function() {
   
 };
 
-var updateProgressBar = function() {
+function getScrollPercent() {
   var scrollTop = $("#text")[0].scrollTop;
   var scrollHeight = $("#text")[0].scrollHeight;
   var divHeight = $("#text").height();
   var scrollBottom = scrollHeight - divHeight;
-  var scrollPercent = scrollTop / scrollBottom;
+  return scrollTop / scrollBottom;
+}
+
+var updateProgressBar = function() {
+  var scrollPercent = getScrollPercent();
   $("#progressBar_progress").css("width", (scrollPercent * 100) + "%");
   
-  var scl = contentScale;
-  
-  postMsg({ "cmd": "scrollSync", "value": scrollPercent });
+  sendScrollMessage(scrollPercent);
 };
+
+var curScrollPercent = 0;
+var lastScrollMessage = 0;
+var scrollMessageQueued = false;
+function sendScrollMessage(scrollPercent) {
+  curScrollPercent = scrollPercent;
+  var now = Date.now();
+  if(now - lastScrollMessage > 20) {
+    lastScrollMessage = now;
+    postMsg({ "cmd": "scrollSync", "value": scrollPercent });
+  }
+  else if(!scrollMessageQueued) {
+    scrollMessageQueued = true;
+    setTimeout(function() {
+      postMsg({ "cmd": "scrollSync", "value": curScrollPercent });
+    }, (20 - (now - lastScrollMessage)));
+  }
+}
 
 chrome.app.window.current().onFullscreened.addListener(function() { setTimeout(updateProgressBar, 100); });
 chrome.app.window.current().onRestored.addListener(function() {  setTimeout(updateProgressBar, 100); });

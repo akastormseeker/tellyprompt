@@ -70,11 +70,15 @@ body.maximized {
     padding-bottom: 3px;
 }
 
-.cast-launcher {
-  width: 28px;
-  height: 28 px;
-  padding: 2px;
-  margin: 4px 8px;
+.cast-launcher-container {
+  display: inline-block;
+  width: 48px;
+  height: 32px;
+  padding: 4px;
+  margin: 3px 0px !important;
+}
+.cast-launcher-container:hover {
+  background: rgba(0,0,0,0.1);
 }
 
 .ui-toolbar .dropdown-menu {

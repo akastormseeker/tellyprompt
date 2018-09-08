@@ -73,12 +73,11 @@ body {
   display: inline-block;
   vertical-align: top;
   width: 48px;
-  height: 24px;
-  margin: 4px;
+  height: 32px;
+  padding: 4px;
 }
-.cast-launcher {
-  
-  
+.cast-launcher-container:hover {
+  background: rgba(255,255,255,0.2);
 }
 
 #windowFullscreen svg path,
@@ -89,6 +88,7 @@ body {
   border: 0px solid transparent;
   width: 48px;
   height:32px;
+  cursor: default;
 }
 #windowFullscreen:hover {
   background: rgba(255,255,255,0.2);
@@ -174,31 +174,28 @@ body {
 
 
 #screenMarker {
-  width: 100%;
+  width: 100vw;
   height: 64px;
   z-index: 0;
   position: absolute;
-  top: 50%;
-  margin-top: 0px;
+  top: 50vh;
+  transform: translateY(-50%);
   opacity: 0.75;
 }
 #screenHr {
   position: absolute;
-  width: 100%;
-  top: 50%;
-  margin-top: -32px;
+  width: 100vw;
+  top: 0;
 }
 #triLeft {
   position: absolute;
   left: 0;
-  top: 50%;
-  margin-top: -32px;
+  top: 0;
 }
 #triRight {
   position: absolute;
   right: 0;
-  top: 50%;
-  margin-top: -32px;
+  top: 0;
 }
 
 #text {
