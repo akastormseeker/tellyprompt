@@ -5,6 +5,65 @@ var mirrorVert = false;
 var windowBounds = null;
 var markerPosition = .5;
 
+var firstConfigReceived = false;
+const context = cast.framework.CastReceiverContext.getInstance();
+
+const CONTROL_CHANNEL = 'urn:x-cast:akastormseeker.tellyprompt';
+context.addCustomMessageListener(CONTROL_CHANNEL, function(event) {
+  console.log("Message Received: ", event);
+  var msg = event.data;
+
+  if(msg.hasOwnProperty("cmd")) {
+    if(msg.cmd == "heartbeat") {
+      console.log("heartbeat received.");
+    }
+    else if(msg.cmd == "config") {
+      console.log("config received.", msg.data);
+      if(!firstConfigReceived) {
+        fadeOutLogo(2000);
+        firstConfigReceived = true;
+      }
+      processConfigData(msg.data);
+        
+    }
+    else if(msg.cmd == "scrollSync") {
+      //console.log("scrollSync received");
+      scrollToPercent(msg.value);
+    }
+    else {
+      console.log("Unhandled message: ", msg);
+    }
+  }
+});
+
+context.addEventListener(cast.framework.system.EventType.READY, () => {
+    //fadeOutLogo(2000);
+});
+        
+function fadeOutLogo(fadeTime) {
+    var startTime = Date.now();
+    var elem = document.getElementById("logo");
+    
+    function doFadeStep() {
+        var stepTime = Date.now();
+        var timeMillis = stepTime - startTime;
+        //lastStepTime = stepTime;
+        var progress = Math.max(0.0, Math.min(1.0, timeMillis / fadeTime));
+        var opacity = 1.0 - progress;
+        elem.style.opacity = opacity;
+        
+        if(progress < 1.0) {
+            setTimeout(doFadeStep, 10);
+        }
+    }
+    
+    doFadeStep();
+}
+
+const options = new cast.framework.CastReceiverOptions();
+options.maxInactivity = 3600; //Development only
+context.start(options);
+
 
 function toRgbaString(hexColor, alpha) {
   var shorthandRegex = /^#?([0-9A-F])([0-9A-F])([0-9A-F])$/i;
