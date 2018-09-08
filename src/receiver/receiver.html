@@ -59,11 +59,15 @@
                 else if(msg.cmd == "config") {
                     console.log("config received.", msg.data);
                     if(!firstConfigReceived) {
-                        fadeOutLogo();
+                        fadeOutLogo(2000);
                         firstConfigReceived = true;
                     }
                     processConfigData(msg.data);
                     
+                }
+                else if(msg.cmd == "scrollSync") {
+                    //console.log("scrollSync received");
+                    scrollToPercent(msg.value);
                 }
                 else {
                     console.log("Unhandled message: ", msg);
